@@ -1,0 +1,58 @@
+body {
+  font-family: Arial, sans-serif;
+}
+#chat-log {
+  position: absolute;
+  bottom: 0;
+}
+#wrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 80px);
+  mask-image: linear-gradient(to bottom, transparent 0px, black 80px);
+}
+.name {
+  color: white;
+  font-weight: bold;
+  background: black;
+}
+.message {
+  color: white;
+}
+.message-wrap {
+  font-size: 24px;
+  background: rgba(0,0,0,0.7);
+  margin-bottom: 12px;
+  border: 3px solid #000000;
+  border-radius: 12px;
+  box-shadow: 2px 2px 12px #000000;
+}
+.message-wrap span, .tipmsg span {
+  padding: 8px;
+  display: inline-block;
+}
+.tipmsg {
+  border: 2px solid #000000;
+  font-size: 24px;
+  background: grey;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 2px 2px 12px #000000;
+  background: rgba(193, 170, 64, 0.7);
+}
+.tipmsg .message {
+   color: black;
+}
+.tipmsg .extra {
+  background: rgba(68, 44, 6, 0.8);
+}
+.tipmsg .name {
+  background: rgb(30, 19, 1, 0.9);
+}
+.extra {
+  color: black;
+  background: #ffcc99;
+}

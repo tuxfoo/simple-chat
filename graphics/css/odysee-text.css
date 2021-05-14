@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+}
+#chat-log {
+  position: absolute;
+  bottom: 0;
+}
+#wrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 80px);
+  mask-image: linear-gradient(to bottom, transparent 0px, black 80px);
+}
+.name {
+  color: white;
+  font-weight: bold;
+}
+.message {
+  color: white;
+}
+.message-wrap {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.message-wrap span, .tipmsg span {
+  padding: 8px;
+  display: inline-block;
+}
+.tipmsg {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.tipmsg .message {
+   color: black;
+}
+.tipmsg .extra {
+}
+.tipmsg .name {
+}
+.extra {
+  color: black;
+}

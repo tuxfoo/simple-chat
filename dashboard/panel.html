@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<style>
+		.monospace {
+			font-family: monospace;
+		}
+	</style>
+  <script src="jscolor.js"></script>
+</head>
+<body>
+	<p>
+		Hello, here you can configure your chat overlay.
+	</p>
+  <form>
+    <label for="nameColour">Donor Text Colour: </label>
+    <br><input id="nameColour" data-jscolor="{preset:&quot;dark large&quot;}" size="4" class="jscolor">
+    <br><label for="msgColour">Text Colour: </label>
+    <br><input id="msgColour" data-jscolor="{preset:&quot;dark large&quot;}" size="4" class="jscolor"><br>
+    <label for="nameBackColour">Boxed Name Background Colour: </label>
+    <br><input id="nameBackColour" data-jscolor="{}" size="4" class="jscolor">
+    <br><label for="msgBackColour">Boxed Text Colour: </label>
+    <br><input id="msgBackColour" data-jscolor="{}" size="4" class="jscolor"><br>
+    <br><label for="extraColour">Boxed Text Colour(Tips and Special Messages): </label>
+    <br><input id="extraColour" data-jscolor="{}" size="4" class="jscolor"><br>
+    <br><label for="extraBackColour">Boxed Extra Colour: </label>
+    <br><input id="extraBackColour" data-jscolor="{}" size="4" class="jscolor"><br>
+    <select id="fontSelect"></select>
+    <label for="fonySize">fontSize: </label>
+    <input id="fontSize" size="2"><br>
+    <br><label for="modeSelect">Theme: </label>
+    <select id="themeSelect">
+      <option value="boxed">odysee-boxed</option><option value="text">odysee-text</option>
+    </select><br>
+    <label for="customCSS">Custom CSS</label><br>
+    <textarea id="customCSS"></textarea><br>
+    <button id="settings" type="submit">Save</button><br>
+    <p>
+      Here you can send test chat messages.
+    </p>
+    <label for="testMessage">Test Message: </label>
+    <br><input id="testMessage" size="10" >
+    <br><label for="testClass">Test Class: </label>
+    <br><input id="testClass" size="4"><br>
+    <button id="test">Send</button><br>
+  </form>
+</body>
+  <script>
+    const settings = nodecg.Replicant('settings');
+    const test = nodecg.Replicant('test');
+    const fonts = ["'Open Sans'", "Arial, sans-serif", "'Times New Roman', serif", "'Courier New', monospace", "'Brush Script MT', cursive", "Palanquin", "'Aclonica'" , "'Aladin'", "'Amita'", "''Audiowide'", "'Balsamiq Sans'", "'Bebas Neue'", "'Fontdiner Swanky'"];
+    var font = document.getElementById("fontSelect");
+    fonts.forEach(populateFontList);
+    NodeCG.waitForReplicants(settings, test).then(() => {
+      loadSettings(settings.value);
+      jscolor.install();
+
+      function loadSettings (value) {
+        document.getElementById('nameColour').value = value.nameColour;
+        document.getElementById('msgColour').value = value.messageColour;
+        document.getElementById('themeSelect').value = value.theme;
+        document.getElementById('fontSize').value = value.fontSize;
+        document.getElementById('fontSelect').value = value.font;
+        document.getElementById('customCSS').value = value.customCSS;
+        document.getElementById('testMessage').value = test.value.message;
+        document.getElementById('testClass').value = test.value.class;
+        document.getElementById('nameBackColour').value = value.nameBackColour;
+        document.getElementById('msgBackColour').value = value.messageBackColour;
+      }
+
+      // save settings
+      document.getElementById('settings').addEventListener('click', e => {
+        settings.value = {
+          nameColour: document.getElementById('nameColour').value,
+          messageColour: document.getElementById('msgColour').value,
+          theme: document.getElementById('themeSelect').value,
+          fontSize: document.getElementById('fontSize').value,
+          font: document.getElementById('fontSelect').value,
+          customCSS: document.getElementById('customCSS').value,
+          nameBackColour: document.getElementById('nameBackColour').value,
+          messageBackColour: document.getElementById('msgBackColour').value
+        }
+      });
+    });
+
+    // Populate the font menu
+    function populateFontList(value, index, array) {
+      var option = document.createElement('option');
+      option.setAttribute('value', value);
+      var optionLabel = document.createTextNode(value);
+      option.appendChild(optionLabel);
+      font.appendChild(option);
+    }
+
+  </script>
+</html>

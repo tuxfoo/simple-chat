@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Aladin' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Amita' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Balsamiq Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Bebas Neue' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Fontdiner Swanky' rel='stylesheet'>
+    <link rel="stylesheet" href="css/animate.css"/>
+    <link rel="stylesheet" href="" type="text/css" id="theme"/>
+  </head>
+  <body>
+    <div id="wrap">
+      <div id="chat-log">
+        <div class="message-wrap">
+          <span class="name">@Billy</span>
+          <span class="message">What on earth is that?</span>
+        </div>
+        <div class="tipmsg">
+          <span class="name">@Bob</span>
+          <span class="extra">Tipped 5 LBC</span>
+          <span class="message">Some sort of animal?</span>
+        </div>
+        <div class="message-wrap">
+          <span class="name">@fred</span>
+          <span class="message">who knows</span>
+        </div>
+        <div class="message-wrap">
+          <span class="name">@fred</span>
+          <span class="message">This is a very long message. The quick brown fox jumped over the lazy dog. Bla, bla bla. The quick brown fox jumped over the lazy dog, The quick brown fox jumped over the lazy dog, The quick brown fox jumped over the lazy dog, The quick brown fox jumped over the lazy dog</span>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const message = nodecg.Replicant("message");
+    const settings = nodecg.Replicant("settings");
+    const chatHistory = nodecg.Replicant("chatHistory");
+    const div = document.getElementById("marquee");
+
+
+    NodeCG.waitForReplicants(message, settings, chatHistory).then(() => {
+      for (var v of chatHistory.value) {
+        message.value = v;
+      }
+      message.on('change', v => {
+        var wrap = document.getElementById("chat-log");
+        var msg_wrap = document.createElement("div");
+        msg_wrap.setAttribute("class", v.extra.class + " animate__animated animate__backInRight animate__slow");
+        var msg_name = document.createElement("span");
+        msg_name.setAttribute("class", "name");
+        var msg = document.createElement("span");
+        msg.setAttribute("class", "message");
+
+        var name = document.createTextNode(v.name);
+        msg_name.appendChild(name);
+        var msg_txt = document.createTextNode(v.message);
+        msg.appendChild(msg_txt);
+
+        msg_wrap.appendChild(msg_name);
+        // Add special message first.
+        if (v.extra.message != "") {
+          var msg_extra = document.createElement("span");
+          msg_extra.setAttribute("class", "extra");
+          var extra_msg = document.createTextNode(v.extra.message);
+          msg_extra.appendChild(extra_msg);
+          msg_wrap.appendChild(msg_extra);
+        }
+        msg_wrap.appendChild(msg);
+        wrap.appendChild(msg_wrap);
+
+        var theme = document.getElementById('theme');
+        if (settings.value.theme == "boxed") {
+          theme.href = 'css/odysee-boxed.css';
+        } else {
+          theme.href = 'css/odysee-text.css';
+        }
+        if (document.contains(document.getElementById("userSettings"))) {
+          document.getElementById("userSettings").remove();
+        }
+        var head = document.getElementsByTagName("head")[0];
+        var userSettings = document.createElement("style");
+        userSettings.setAttribute("id", "userSettings");
+        var userConf = document.createTextNode(
+          ".name { color: " + settings.value.nameColour +
+          "; } .message { color: " + settings.value.messageColour +
+          "; } body { font-family: " + settings.value.font +
+          "; font-size: " + settings.value.fontSize +
+          "; }");
+        userSettings.appendChild(userConf);
+        if (settings.value.theme != "text") {
+          var boxed = document.createTextNode(
+            ".message-wrap { background: " + settings.value.messageBackColour +
+            "; } .name { background: " + settings.value.nameBackColour + "}"
+          );
+          userSettings.appendChild(boxed);
+        }
+        head.appendChild(userSettings);
+        if (document.contains(document.getElementById("userCSS"))) {
+          document.getElementById("userCSS").remove();
+        }
+        var userCSS = document.createElement("style");
+        userCSS.setAttribute("id", "userCSS");
+        var userCSSCode = document.createTextNode(settings.value.customCSS);
+        userCSS.appendChild(userCSSCode);
+        head.appendChild(userCSS);
+      });
+    });
+  </script>
+</html>

@@ -49,10 +49,11 @@
   <script>
     const settings = nodecg.Replicant('settings');
     const test = nodecg.Replicant('test');
+    const message = nodecg.Replicant('message');
     const fonts = ["'Open Sans'", "Arial, sans-serif", "'Times New Roman', serif", "'Courier New', monospace", "'Brush Script MT', cursive", "Palanquin", "'Aclonica'" , "'Aladin'", "'Amita'", "''Audiowide'", "'Balsamiq Sans'", "'Bebas Neue'", "'Fontdiner Swanky'"];
     var font = document.getElementById("fontSelect");
     fonts.forEach(populateFontList);
-    NodeCG.waitForReplicants(settings, test).then(() => {
+    NodeCG.waitForReplicants(settings, test, message).then(() => {
       loadSettings(settings.value);
       jscolor.install();
 
@@ -84,6 +85,16 @@
           messageBackColour: document.getElementById('msgBackColour').value,
           extraBackColour: document.getElementById('extraBackColour').value,
           extraTextColour: document.getElementById('extraTextColour').value
+        }
+      });
+
+      document.getElementById('test').addEventListener('click', e => {
+        message.value = {
+          name: "TestGuy",
+          message: document.getElementById('testMessage').value,
+          extra: {
+            class: document.getElementById('testClass').value,
+            message: "" }
         }
       });
     });

@@ -16,11 +16,19 @@ module.exports = function (nodecg) {
 		extraTextColour: "rgba(0,0,0,0.7)"
 		}
 	});
+
 	nodecg.Replicant('test', { defaultValue: {name: "@MrTester", class: "message-wrap", message: "", change: false}, persistent: false});
 	const router = nodecg.Router();
 	const message = nodecg.Replicant('message');
 	const chatHistory = nodecg.Replicant('chatHistory');
 
+	chatHistory.on('change', v => {
+		//Do not store really old messages
+		if (chatHistory.value.length - 1 > 20 ) {
+			var purge = chatHistory.value.length - 21;
+			chatHistory.value.splice(0, purge);
+		}
+	});
 
 	router.post('/log', (req, res) => {
 			const name = req.body.name;

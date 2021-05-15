@@ -22,13 +22,16 @@
     const chatHistory = nodecg.Replicant("chatHistory");
     const div = document.getElementById("marquee");
 
-
     NodeCG.waitForReplicants(message, settings, chatHistory).then(() => {
+      var i = 0;
       for (var v of chatHistory.value) {
         message.value = v;
+        i++;
+        if (i > 19) {
+          break;
+        }
       }
       message.on('change', v => {
-
         var wrap = document.getElementById("chat-log");
         var msg_wrap = document.createElement("div");
         msg_wrap.setAttribute("class", v.extra.class + " animate__animated animate__backInRight animate__slow usermsg");

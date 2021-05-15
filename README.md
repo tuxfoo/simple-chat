@@ -1,7 +1,10 @@
 # simple-chat
 A simple chat overlay for nodecg
 
-simple-chat own its own is just for rendering chat and configuring it's appearance, you need to connect it to a chat service for which ever streaming service you are using.
+simple-chat on its own is just for rendering chat and configuring it's appearance, you need to connect it to a chat service for which ever streaming service you are using, the best option to create another bundle that connects to this one.
+
+Currently there is a connector for the following streaming services.
+* Odysee https://github.com/tuxfoo/odysee-simple-alerts-connector
 
 # simple-chat has a rest API
 We can use extra to assign a unique CSS class to a message and assign a secondary message.

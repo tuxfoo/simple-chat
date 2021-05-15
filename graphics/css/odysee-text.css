@@ -28,6 +28,11 @@ body {
 .message-wrap span, .tipmsg span {
   padding: 8px;
   display: inline-block;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 .tipmsg {
   font-size: 24px;

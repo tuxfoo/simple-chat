@@ -22,8 +22,8 @@
     <br><input id="nameBackColour" data-jscolor="{}" size="4" class="jscolor">
     <br><label for="msgBackColour">Boxed Text Colour: </label>
     <br><input id="msgBackColour" data-jscolor="{}" size="4" class="jscolor"><br>
-    <br><label for="extraColour">Boxed Text Colour(Tips and Special Messages): </label>
-    <br><input id="extraColour" data-jscolor="{}" size="4" class="jscolor"><br>
+    <br><label for="extraTextColour">Boxed Text Colour(Tips and Special Messages): </label>
+    <br><input id="extraTextColour" data-jscolor="{}" size="4" class="jscolor"><br>
     <br><label for="extraBackColour">Boxed Extra Colour: </label>
     <br><input id="extraBackColour" data-jscolor="{}" size="4" class="jscolor"><br>
     <select id="fontSelect"></select>
@@ -67,6 +67,8 @@
         document.getElementById('testClass').value = test.value.class;
         document.getElementById('nameBackColour').value = value.nameBackColour;
         document.getElementById('msgBackColour').value = value.messageBackColour;
+        document.getElementById('extraBackColour').value = value.extraBackColour;
+        document.getElementById('extraTextColour').value = value.extraTextColour;
       }
 
       // save settings
@@ -79,7 +81,9 @@
           font: document.getElementById('fontSelect').value,
           customCSS: document.getElementById('customCSS').value,
           nameBackColour: document.getElementById('nameBackColour').value,
-          messageBackColour: document.getElementById('msgBackColour').value
+          messageBackColour: document.getElementById('msgBackColour').value,
+          extraBackColour: document.getElementById('extraBackColour').value,
+          extraTextColour: document.getElementById('extraTextColour').value
         }
       });
     });

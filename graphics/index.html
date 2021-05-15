@@ -13,23 +13,6 @@
   <body>
     <div id="wrap">
       <div id="chat-log">
-        <div class="message-wrap">
-          <span class="name">@Billy</span>
-          <span class="message">What on earth is that?</span>
-        </div>
-        <div class="tipmsg">
-          <span class="name">@Bob</span>
-          <span class="extra">Tipped 5 LBC</span>
-          <span class="message">Some sort of animal?</span>
-        </div>
-        <div class="message-wrap">
-          <span class="name">@fred</span>
-          <span class="message">who knows</span>
-        </div>
-        <div class="message-wrap">
-          <span class="name">@fred</span>
-          <span class="message">This is a very long message. The quick brown fox jumped over the lazy dog. Bla, bla bla. The quick brown fox jumped over the lazy dog, The quick brown fox jumped over the lazy dog, The quick brown fox jumped over the lazy dog, The quick brown fox jumped over the lazy dog</span>
-        </div>
       </div>
     </div>
   </body>
@@ -45,9 +28,10 @@
         message.value = v;
       }
       message.on('change', v => {
+
         var wrap = document.getElementById("chat-log");
         var msg_wrap = document.createElement("div");
-        msg_wrap.setAttribute("class", v.extra.class + " animate__animated animate__backInRight animate__slow");
+        msg_wrap.setAttribute("class", v.extra.class + " animate__animated animate__backInRight animate__slow usermsg");
         var msg_name = document.createElement("span");
         msg_name.setAttribute("class", "name");
         var msg = document.createElement("span");
@@ -92,7 +76,9 @@
         if (settings.value.theme != "text") {
           var boxed = document.createTextNode(
             ".message-wrap { background: " + settings.value.messageBackColour +
-            "; } .name { background: " + settings.value.nameBackColour + "}"
+            "; } .name { background: " + settings.value.nameBackColour + "}" +
+            ".extra { background: " + settings.value.extraBackColour + "; color: " +
+            settings.value.extraTextColour + "; }"
           );
           userSettings.appendChild(boxed);
         }
@@ -105,6 +91,18 @@
         var userCSSCode = document.createTextNode(settings.value.customCSS);
         userCSS.appendChild(userCSSCode);
         head.appendChild(userCSS);
+
+        function removeElementsByClass(className){
+          var elements = document.getElementsByClassName(className);
+          if(elements.length>20){
+            var to_remove=elements.length-20;
+            for(var i=0; i<to_remove; i++) {
+              //console.log(elements[0]);
+              elements[0].parentNode.removeChild(elements[0]);
+            }
+          }
+        }
+        removeElementsByClass("usermsg");
       });
     });
   </script>

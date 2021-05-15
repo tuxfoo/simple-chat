@@ -11,7 +11,9 @@ module.exports = function (nodecg) {
 		customCSS: "",
 		fontSize: "24px",
 		nameBackColour: "rgba(0,0,0,0.85)",
-		messageBackColour: "rgba(0,0,0,0.7)"
+		messageBackColour: "rgba(0,0,0,0.7)",
+		extraBackColour: "rgba(68, 44, 6, 0.8)",
+		extraTextColour: "rgba(0,0,0,0.7)"
 		}
 	});
 	nodecg.Replicant('test', { defaultValue: {name: "@MrTester", class: "message-wrap", message: "", change: false}, persistent: false});

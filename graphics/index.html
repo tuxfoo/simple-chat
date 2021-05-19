@@ -31,10 +31,32 @@
           break;
         }
       }
+
+      const animateCSS = (element, animation, prefix = 'animate__') =>
+        // We create a Promise and return it
+        new Promise((resolve, reject) => {
+          const animationName = `${prefix}${animation}`;
+          const node = element;
+
+          node.classList.add(`${prefix}animated`, animationName);
+
+          // When the animation ends, we clean the classes and resolve the Promise
+          function handleAnimationEnd(event) {
+            event.stopPropagation();
+            node.classList.remove(`${prefix}animated`, animationName);
+            resolve('Animation ended');
+            if (settings.value.time > 0) {
+              setTimeout(function(){node.classList.add(`${prefix}animated`, 'animate__fadeOut');}, settings.value.time * 1000);
+            }
+          }
+
+          node.addEventListener('animationend', handleAnimationEnd, {once: true});
+        });
+
       message.on('change', v => {
         var wrap = document.getElementById("chat-log");
         var msg_wrap = document.createElement("div");
-        msg_wrap.setAttribute("class", v.extra.class + " animate__animated animate__backInRight animate__slow usermsg");
+        msg_wrap.setAttribute("class", v.extra.class + " usermsg");
         var msg_name = document.createElement("span");
         msg_name.setAttribute("class", "name");
         var msg = document.createElement("span");
@@ -54,6 +76,7 @@
           msg_extra.appendChild(extra_msg);
           msg_wrap.appendChild(msg_extra);
         }
+        animateCSS(msg_wrap, "backInRight");
         msg_wrap.appendChild(msg);
         wrap.appendChild(msg_wrap);
 

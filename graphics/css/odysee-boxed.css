@@ -5,6 +5,7 @@ body {
   position: absolute;
   bottom: 0;
 }
+
 #wrap {
   position: relative;
   overflow: hidden;

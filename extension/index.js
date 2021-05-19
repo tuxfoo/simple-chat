@@ -13,7 +13,8 @@ module.exports = function (nodecg) {
 		nameBackColour: "rgba(0,0,0,0.85)",
 		messageBackColour: "rgba(0,0,0,0.7)",
 		extraBackColour: "rgba(68, 44, 6, 0.8)",
-		extraTextColour: "rgba(0,0,0,0.7)"
+		extraTextColour: "rgba(0,0,0,0.7)",
+		time: 0
 		}
 	});
 

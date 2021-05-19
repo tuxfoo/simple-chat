@@ -29,6 +29,8 @@
     <select id="fontSelect"></select>
     <label for="fonySize">fontSize: </label>
     <input id="fontSize" size="2"><br>
+    <label for="time">Time before message fade out in seconds(0 to disable): </label>
+    <input id="time" size="2"><br>
     <br><label for="modeSelect">Theme: </label>
     <select id="themeSelect">
       <option value="boxed">odysee-boxed</option><option value="text">odysee-text</option>
@@ -70,6 +72,7 @@
         document.getElementById('msgBackColour').value = value.messageBackColour;
         document.getElementById('extraBackColour').value = value.extraBackColour;
         document.getElementById('extraTextColour').value = value.extraTextColour;
+        document.getElementById('time').value = value.time;
       }
 
       // save settings
@@ -84,7 +87,8 @@
           nameBackColour: document.getElementById('nameBackColour').value,
           messageBackColour: document.getElementById('msgBackColour').value,
           extraBackColour: document.getElementById('extraBackColour').value,
-          extraTextColour: document.getElementById('extraTextColour').value
+          extraTextColour: document.getElementById('extraTextColour').value,
+          time: document.getElementById('time').value
         }
       });
 

@@ -45,8 +45,10 @@
             event.stopPropagation();
             node.classList.remove(`${prefix}animated`, animationName);
             resolve('Animation ended');
-            if (settings.value.time > 0) {
-              setTimeout(function(){node.classList.add(`${prefix}animated`, 'animate__fadeOut');}, settings.value.time * 1000);
+            if (typeof variable !== 'undefined') {
+              if (settings.value.time > 0) {
+                setTimeout(function(){node.classList.add(`${prefix}animated`, 'animate__fadeOut');}, settings.value.time * 1000);
+              }
             }
           }
 

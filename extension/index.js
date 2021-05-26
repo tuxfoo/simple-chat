@@ -14,7 +14,9 @@ module.exports = function (nodecg) {
 		messageBackColour: "rgba(0,0,0,0.7)",
 		extraBackColour: "rgba(68, 44, 6, 0.8)",
 		extraTextColour: "rgba(0,0,0,0.7)",
-		time: 0
+		time: 0,
+		exitAnimation: "animate__fadeOut",
+		entryAnimation: "animate__fadeIn"
 		}
 	});
 

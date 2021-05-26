@@ -31,6 +31,28 @@
     <input id="fontSize" size="2"><br>
     <label for="time">Time before message fade out in seconds(0 to disable): </label>
     <input id="time" size="2"><br>
+    <br><label for="entryAnimation">Entry Animation: </label>
+    <select id="entryAnimation">
+      <option value="animate__fadeIn">Fade In</option>
+      <option value="animate__fadeInLeft">Fade Left</option>
+      <option value="animate__fadeInRight">Fade Right</option>
+      <option value="animate__fadeInDown">Fade Down</option>
+      <option value="animate__fadeInUp">Fade Up</option>
+      <option value="animate__zoomIn">Zoom In</option>
+      <option value="animate__tada">Tada</option>
+      <option value="animate__bounceIn">Bounce</option>
+    </select><br>
+    <br><label for="exitAnimation">Exit Animation: </label>
+    <select id="exitAnimation">
+      <option value="animate__fadeOut">fade out</option>
+      <option value="animate__fadeOutLeft">Fade Left</option>
+      <option value="animate__fadeOutRight">Fade Right</option>
+      <option value="animate__fadeOutDown">Fade Down</option>
+      <option value="animate__fadeOutUp">Fade Up</option>
+      <option value="animate__zoomOut">Zoom Out</option>
+      <option value="animate__hinge">Hinge</option>
+      <option value="animate__bounceOut">Bounce</option>
+    </select><br>
     <br><label for="modeSelect">Theme: </label>
     <select id="themeSelect">
       <option value="boxed">odysee-boxed</option><option value="text">odysee-text</option>
@@ -73,6 +95,8 @@
         document.getElementById('extraBackColour').value = value.extraBackColour;
         document.getElementById('extraTextColour').value = value.extraTextColour;
         document.getElementById('time').value = value.time;
+        document.getElementById('exitAnimation').value = value.exitAnimation;
+        document.getElementById('entryAnimation').value = value.entryAnimation;
       }
 
       // save settings
@@ -88,7 +112,9 @@
           messageBackColour: document.getElementById('msgBackColour').value,
           extraBackColour: document.getElementById('extraBackColour').value,
           extraTextColour: document.getElementById('extraTextColour').value,
-          time: document.getElementById('time').value
+          time: document.getElementById('time').value,
+          exitAnimation: document.getElementById('exitAnimation').value,
+          entryAnimation: document.getElementById('entryAnimation').value
         }
       });
 

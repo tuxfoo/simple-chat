@@ -35,7 +35,7 @@
       const animateCSS = (element, animation, prefix = 'animate__') =>
         // We create a Promise and return it
         new Promise((resolve, reject) => {
-          const animationName = `${prefix}${animation}`;
+          const animationName = `${animation}`;
           const node = element;
 
           node.classList.add(`${prefix}animated`, animationName);
@@ -46,7 +46,12 @@
             node.classList.remove(`${prefix}animated`, animationName);
             resolve('Animation ended');
             if (settings.value.time > 0) {
-              setTimeout(function(){node.classList.add(`${prefix}animated`, 'animate__fadeOut');}, settings.value.time * 1000);
+              if (typeof settings.value.exitAnimation == 'undefined') {
+                var animationExit = 'animate__fadeOut';
+              } else {
+                var animationExit = settings.value.exitAnimation;
+              }
+              setTimeout(function(){node.classList.add(`${prefix}animated`, animationExit);}, settings.value.time * 1000);
             }
           }
 
@@ -76,7 +81,12 @@
           msg_extra.appendChild(extra_msg);
           msg_wrap.appendChild(msg_extra);
         }
-        animateCSS(msg_wrap, "backInRight");
+        if (typeof settings.value.entryAnimation == 'undefined') {
+          var animationEntry = 'animate__fadeIn';
+        } else {
+          var animationEntry = settings.value.entryAnimation;
+        }
+        animateCSS(msg_wrap, animationEntry);
         msg_wrap.appendChild(msg);
         wrap.appendChild(msg_wrap);
 
